@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+# User Table with Search Functionality
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+**User Table App** is a simple and intuitive web application designed for managing a list of users. It allows users to:
+  - View a table of all users with their details (name, email, phone, username)
+  - Search for specific users by name, email, phone, or username
+  - Sort users based on various criteria
+  - Filter users based on search queries
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application is built to provide a seamless user experience for managing user data efficiently.
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  - **React with TypeScript:** Used for building user interface components and ensuring type safety.
+  - **Redux Toolkit:** For state management, providing a simple and efficient way to manage application state.
+  - **Custom Hooks:** Hooks created to enhance type safety and simplify Redux state management.
+  - **API (fetch):** Used to fetch data from external APIs, such as JSONPlaceholder, for user data management.
+  - **MUI (Material-UI):** A popular React UI framework for building modern, responsive user interfaces.
 
-- Configure the top-level `parserOptions` property like this:
+## DEMO link
+  - [User Table App DEMO](https://smart-test-project.vercel.app/)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation instructions
+To install the **User Table App** project locally, follow these steps:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+  ### 1. Cloning the Repository
+  Clone the repository to your local computer:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+  ```bash
+  git clone https://github.com/demkoveronika/smart-test-project.git
+  ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+  ### 2. Change to the Project Directory
+  Go to the directory, where the project is saved:
+
+  ```bash
+  cd smart-test-project
+  ```
+
+  ### 3. Installing Dependencies
+  Install dependencies using the package manager. For example, if you are using Node.js:
+
+  ```bash
+  npm install
+  ```
+
+  Or if you are using Yarn:
+
+  ```bash
+  yarn install
+  ```
+
+  ### 4. Run the Project
+  After installing the dependencies, run the project:
+
+  ```bash
+  npm run dev
+  ```
+
+  This command will start the server and open the project in your browser at http://localhost:5173
