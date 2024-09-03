@@ -5,8 +5,8 @@ const BASE_URL = 'https://jsonplaceholder.typicode.com';
 function wait(delay: number): Promise<void> {
   return new Promise(resolve => {
     setTimeout(resolve, delay);
-  })
-}
+  });
+};
 
 function get<T>(url: string): Promise<T> {
   const fullURL = BASE_URL + url;

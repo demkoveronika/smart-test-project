@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import './App.css'
-import { useAppDispatch, useAppSelector } from './app/hooks'
-import { User } from './types/User';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+
 import { getUsers } from './api';
 import { setUsers } from './features/users';
+
+import { User } from './types/User';
 import { UserTable } from './components/UserTable';
+import { Loader } from './components/Loader';
+
+import './App.css';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -12,16 +16,18 @@ const App = () => {
   const filters = useAppSelector(state => state.filters);
 
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        setLoading(true);
         const fetchedUsers: User[] = await getUsers();
-        console.log('Fetched Users:', fetchedUsers);
-
         dispatch(setUsers(fetchedUsers))
       } catch {
         throw new Error('Failed to fetch users');
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -37,17 +43,18 @@ const App = () => {
           .includes(filters[key as keyof typeof filters].toLowerCase().trim())
       )
     )
-
+  
     setFilteredUsers(filtered);
-    console.log(filtered)
   }, [users, filters])
 
 
   return (
     <>
-      <UserTable users={filteredUsers} />
+      {loading ? <Loader /> : (
+        <UserTable users={filteredUsers} />
+      )}
     </>
   )
 }
 
-export default App
+export default App;
