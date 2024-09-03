@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { User } from './types/User';
@@ -9,6 +9,9 @@ import { UserTable } from './components/UserTable';
 const App = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector(state => state.users);
+  const filters = useAppSelector(state => state.filters);
+
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,11 +26,26 @@ const App = () => {
     }
 
     fetchUsers();
-  }, [dispatch])
+  }, [dispatch]);
+
+  useEffect(() => {
+    const filtered = users.filter(user =>
+      Object.keys(filters).every(key => 
+        user[key as keyof User]
+          .toString()
+          .toLowerCase()
+          .includes(filters[key as keyof typeof filters].toLowerCase().trim())
+      )
+    )
+
+    setFilteredUsers(filtered);
+    console.log(filtered)
+  }, [users, filters])
+
 
   return (
     <>
-      <UserTable users={users}/>
+      <UserTable users={filteredUsers} />
     </>
   )
 }

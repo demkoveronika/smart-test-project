@@ -1,8 +1,10 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import usersReducer from '../features/users'
+import filtersReducer from "../features/filter";
 
 const rootReducer = combineSlices({
   users: usersReducer,
+  filters: filtersReducer,
 });
 
 export const store = configureStore({

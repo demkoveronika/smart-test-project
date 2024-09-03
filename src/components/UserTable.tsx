@@ -1,7 +1,7 @@
 import { User } from "../types/User"
 
 type Props = {
-  users: User[]
+  users: User[],
 };
 
 import * as React from 'react';
@@ -10,6 +10,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { UserFilter } from "./UserFilter";
+import { useAppSelector } from "../app/hooks";
 
 interface Column {
   id: 'name' | 'username' | 'email' | 'phone';
@@ -36,6 +38,8 @@ const columns: readonly Column[] = [
 ];
 
 export const UserTable: React.FC<Props> = ({ users }) => {
+  const filters = useAppSelector(state => state.filters);
+
   return (
     <>
       <Table stickyHeader aria-label="sticky table" style={{border: '1px solid #000'}}>
@@ -44,9 +48,11 @@ export const UserTable: React.FC<Props> = ({ users }) => {
             {columns.map((column) => (
               <TableCell
                 key={column.id}
-                style={{ minWidth: column.minWidth, backgroundColor: column.backgroundColor, fontWeight: 'bold'}}
+                style={{ minWidth: column.minWidth, backgroundColor: column.backgroundColor, fontWeight: 'bold', padding: '10px'}}
               >
                 {column.label}
+                <br />
+                <UserFilter query={filters[column.id]} filtersKey={column.id} />
               </TableCell>
             ))}
           </TableRow>
